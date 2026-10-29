@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" role="img" aria-label="Rook">
+  <title>Rook</title>
+  <g fill="#24232b" stroke="#77737f" stroke-width="0.9" stroke-linejoin="round">
+    <path d="M7 3.5h4v3h3v-3h4v3h3v-3h4v7.5H7z"/>
+    <path d="M9 11h14l-1.6 3H10.6z"/>
+    <path d="M10.6 14h10.8v10H10.6z"/>
+    <path d="M8.5 24h15v2.6h-15z"/>
+    <path d="M6.5 26.6h19v2.4h-19z"/>
+  </g>
+  <g fill="#a77de0">
+    <path d="M16 15.6l2.1 4.2-2.1 4.2-2.1-4.2z"/>
+    <path d="M9.4 7.6h1.2v1.6H9.4zM21.4 7.6h1.2v1.6h-1.2z" opacity="0.75"/>
+  </g>
+</svg>

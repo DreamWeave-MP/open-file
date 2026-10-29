@@ -1,0 +1,10 @@
+{% macro move_line(page) %}
+<li class="move">
+  <a href="{{ page.permalink | safe }}">
+    <span class="move__number">{% if page.extra.move %}{{ page.extra.move }}.{% endif %}</span>
+    <span class="move__title">{{ page.title }}</span>
+  </a>
+  <span class="move__meta">{{ page.date | date }}{% if page.extra.kind %} · {{ page.extra.kind }}{% endif %} · {{ page.reading_time }} min</span>
+  {% if page.description %}<p class="move__description">{{ page.description }}</p>{% endif %}
+</li>
+{% endmacro move_line %}

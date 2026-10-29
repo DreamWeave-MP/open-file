@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% import "macros.html" as macros %}
+{% block content %}
+<section class="moves">
+  <h1>{{ section.title }}</h1>
+  {{ section.content | safe }}
+  <ul class="move-list">
+    {% for page in section.pages %}{{ macros::move_line(page=page) }}{% endfor %}
+  </ul>
+</section>
+{% endblock content %}

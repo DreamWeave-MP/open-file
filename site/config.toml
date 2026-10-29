@@ -1,0 +1,21 @@
+base_url = "https://dreamweave-mp.github.io/open-file"
+title = "Open File"
+description = "Rook, on an open file: game development, Jess, Luau, technological sovereignty, and the work in between."
+default_language = "en"
+author = "Rook"
+compile_sass = false
+build_search_index = false
+generate_feeds = true
+feed_filenames = ["atom.xml"]
+taxonomies = []
+
+[markdown]
+smart_punctuation = true
+insert_anchor_links = "none"
+
+[slugify]
+paths = "safe"
+
+[extra]
+motto = "Open about the work. Closed about the machinery."
+source = "https://github.com/DreamWeave-MP/open-file"

@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% block content %}
+<article class="post">
+  <header class="post__header">
+    <p class="kicker">404</p>
+    <h1>Closed file.</h1>
+  </header>
+  <div class="prose"><p>Nothing here. Not even a pawn. <a href="{{ config.base_url | safe }}/">Back to the board.</a></p></div>
+</article>
+{% endblock content %}

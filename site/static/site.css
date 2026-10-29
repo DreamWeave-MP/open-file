@@ -1,0 +1,122 @@
+/* Open File. Basalt and stone, one amethyst inlay. System fonts, no scripts, nothing fetched
+   from anywhere else. Dark by default; the light variant is for people reading in daylight. */
+
+:root {
+  --bg: #0e0d11;
+  --surface: #16151b;
+  --text: #cfccd6;
+  --muted: #8b8795;
+  --rule: #29272f;
+  --accent: #a77de0;
+  --accent-soft: rgba(167, 125, 224, 0.14);
+  --serif: "Iowan Old Style", "Palatino Linotype", "URW Palladio L", P052, Charter, "Bitstream Charter", Georgia, serif;
+  --mono: ui-monospace, "JetBrains Mono", "Cascadia Code", "Source Code Pro", Menlo, Consolas, monospace;
+  --measure: 40rem;
+  color-scheme: dark;
+}
+
+@media (prefers-color-scheme: light) {
+  :root {
+    --bg: #f4f2ee;
+    --surface: #ebe8e2;
+    --text: #23212a;
+    --muted: #615c69;
+    --rule: #d8d3cb;
+    --accent: #6b3fb4;
+    --accent-soft: rgba(107, 63, 180, 0.1);
+    color-scheme: light;
+  }
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html { background: var(--bg); }
+
+body {
+  margin: 0 auto;
+  max-width: calc(var(--measure) + 4rem);
+  padding: 0 2rem;
+  color: var(--text);
+  background: var(--bg);
+  font: 1.125rem/1.72 var(--serif);
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+}
+
+a { color: inherit; text-decoration-color: var(--accent); text-decoration-thickness: 1px; text-underline-offset: 0.18em; }
+a:hover { color: var(--accent); }
+a:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 2px; }
+
+/* The masthead: the mark, and the file the rook stands on. */
+.masthead {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 2.25rem 0 1.5rem;
+  border-bottom: 1px solid var(--rule);
+}
+
+.mark { display: inline-flex; align-items: center; gap: 0.6rem; text-decoration: none; }
+.mark span { font: 600 1.05rem/1 var(--mono); letter-spacing: 0.08em; text-transform: uppercase; }
+.mark img { display: block; }
+
+.masthead nav { display: flex; flex-wrap: wrap; gap: 1.25rem; font: 0.85rem/1 var(--mono); }
+.masthead nav a { color: var(--muted); text-decoration: none; }
+.masthead nav a:hover { color: var(--accent); }
+
+main { padding: 3rem 0 4rem; }
+
+h1, h2, h3 { line-height: 1.2; font-weight: 600; letter-spacing: -0.01em; }
+h1 { font-size: 2.2rem; margin: 0 0 0.75rem; }
+h2 { font-size: 1.35rem; margin: 2.6rem 0 0.8rem; }
+h3 { font-size: 1.1rem; margin: 2rem 0 0.6rem; }
+
+/* Mono for what a machine would say: dates, numbers, kinds, code. */
+.kicker, .post__meta, .move__meta, .move__number, .checked strong {
+  font-family: var(--mono);
+  font-size: 0.8rem;
+  letter-spacing: 0.04em;
+  color: var(--muted);
+}
+
+.kicker { margin: 0 0 0.6rem; text-transform: uppercase; }
+.kicker::before { content: ""; display: inline-block; width: 0.45rem; height: 0.45rem; margin-right: 0.55rem; background: var(--accent); transform: rotate(45deg) translateY(-0.12rem); }
+
+.post__header { margin-bottom: 2.2rem; }
+.post__meta { margin: 0; }
+
+.prose p, .prose ul, .prose ol, .prose blockquote, .prose pre { margin: 0 0 1.25rem; }
+.prose blockquote { margin-left: 0; padding: 0.2rem 0 0.2rem 1.2rem; border-left: 2px solid var(--accent); color: var(--muted); font-style: italic; }
+.prose hr { border: 0; height: 1px; background: var(--rule); margin: 2.5rem 0; }
+.prose del { color: var(--muted); }
+
+code, pre { font-family: var(--mono); font-size: 0.86em; }
+:not(pre) > code { padding: 0.1em 0.35em; background: var(--surface); border-radius: 3px; }
+pre { padding: 1rem 1.2rem; overflow-x: auto; background: var(--surface); border: 1px solid var(--rule); border-radius: 4px; line-height: 1.5; }
+
+.checked { margin-top: 3rem; padding: 0.9rem 1.1rem; border: 1px solid var(--rule); border-left: 2px solid var(--accent); background: var(--accent-soft); font-size: 0.95rem; }
+.checked strong { display: block; margin-bottom: 0.25rem; text-transform: uppercase; }
+
+.intro { font-size: 1.2rem; }
+.intro p:first-child { margin-top: 0; }
+
+.move-list { list-style: none; margin: 0; padding: 0; }
+.move { padding: 1.1rem 0; border-top: 1px solid var(--rule); }
+.move:last-child { border-bottom: 1px solid var(--rule); }
+.move > a { display: flex; gap: 0.7rem; align-items: baseline; text-decoration: none; font-size: 1.25rem; font-weight: 600; }
+.move__number { min-width: 2.2rem; color: var(--accent); font-size: 0.9rem; }
+.move__meta { display: block; margin: 0.2rem 0 0 2.9rem; }
+.move__description { margin: 0.4rem 0 0 2.9rem; color: var(--muted); font-size: 1rem; }
+
+.colophon { padding: 2rem 0 3rem; border-top: 1px solid var(--rule); color: var(--muted); font-size: 0.85rem; line-height: 1.6; }
+.colophon p { margin: 0 0 0.6rem; }
+.colophon .motto { color: var(--text); font: italic 1rem/1.5 var(--serif); }
+
+@media (max-width: 34rem) {
+  body { padding: 0 1.15rem; font-size: 1.06rem; }
+  h1 { font-size: 1.75rem; }
+  .move__meta, .move__description { margin-left: 0; }
+  .move > a { flex-direction: column; gap: 0.15rem; }
+}
