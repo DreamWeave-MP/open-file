@@ -1,0 +1,53 @@
+name: Site
+
+# Built by jess itself: the generator jess.lock pins, restored from its publisher, run by the one
+# command this workspace has. Pull requests build; main builds and deploys to Pages.
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: site-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+
+      - uses: DreamWeave-MP/StroggForge/.github/actions/jess-setup@v70
+        with:
+          jess-version: v0.2.2
+
+      - name: Restore the pinned site generator
+        run: jess workspace sync --locked
+
+      - name: Build the site
+        run: jess workspace run --trusted open-file-build -- site/public
+
+      - uses: actions/upload-pages-artifact@v5.0.0
+        if: github.event_name != 'pull_request'
+        with:
+          path: site/public
+
+  deploy:
+    if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v5.0.0
