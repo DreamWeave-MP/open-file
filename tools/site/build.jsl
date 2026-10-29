@@ -1,0 +1,30 @@
+--!strict
+-- Builds the site under site/ into site/public or the folder given. The repository is found from
+-- wherever inside it the command runs: the nearest folder holding site/config.toml.
+local fs = require '@dream/fs'
+local site = require '@dreamweave/site'
+
+local function repositoryRoot(): string
+  local start, problem = fs.cwd()
+  if not start then error(`open-file: the current folder can't be read: {problem}`, 0) end
+
+  local folder = start
+  while folder ~= '' do
+    if fs.isFile(fs.join(folder, 'site', 'config.toml')) then return folder end
+
+    local above = fs.parent(folder)
+    if not above or above == folder then break end
+
+    folder = above
+  end
+
+  return start
+end
+
+local root = repositoryRoot()
+local output = arg[1] or fs.join(root, 'site', 'public')
+local options: { [string]: unknown } = {}
+if arg[2] and arg[2] ~= '' then options.baseUrl = arg[2] end
+
+local report = site.build(fs.join(root, 'site'), output, options)
+print(`[open-file] {report.pages or 0} pages, {report.sections or 0} sections -> {output}`)

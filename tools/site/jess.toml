@@ -1,0 +1,26 @@
+manifest_version = 1
+
+[package]
+id = "org.dreamweave.open-file"
+version = "0.1.0"
+jess_api = "1"
+default_target = "build"
+include = ["build.jsl"]
+
+[dependencies]
+"org.dreamweave.site" = "0.1"
+
+# The blog's one command; it exports nothing.
+[[layer]]
+id = "open-file.tools"
+requires = ["dreamweave.site"]
+exports = []
+
+# `jess workspace run --trusted open-file-build -- [output] [base url]`: the site under site/, built
+# into site/public or the folder given, with config.toml's base_url unless the second argument
+# replaces it.
+[targets.build]
+kind = "command"
+command = "open-file-build"
+entry = "build.jsl"
+capabilities = ["filesystem.read", "filesystem.write"]

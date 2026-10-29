@@ -1,0 +1,9 @@
+# Open File as a jess workspace: one package, the command that builds the site under site/ with
+# DreamWeave's site generator, org.dreamweave.site, which jess.lock pins from its publisher.
+#
+#   jess workspace sync --locked
+#   jess workspace run --trusted open-file-build -- site/public
+manifest_version = 1
+
+[workspace]
+members = ["tools/site"]
